@@ -1,6 +1,8 @@
 package com.example.msrobots.domain.model;
 
 import com.example.msrobots.common.Constants;
+import com.example.msrobots.domain.exception.BadMovement;
+import com.example.msrobots.domain.exception.OutOfBoundsException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +40,8 @@ public class Robot {
             case Constants.MOVEMENT_M:
                 advance();
                 break;
+            default:
+                throw new BadMovement("Error! Movement not recognised!");
         }
     }
 

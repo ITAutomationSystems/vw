@@ -18,4 +18,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
+    @ExceptionHandler(BadOrientation.class)
+    public ResponseEntity<String> handleRobotValidationException(BadOrientation ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(BadRobotPosition.class)
+    public ResponseEntity<String> handleRobotValidationException(BadRobotPosition ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(BadMovement.class)
+    public ResponseEntity<String> handleRobotValidationException(BadMovement ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+
 }

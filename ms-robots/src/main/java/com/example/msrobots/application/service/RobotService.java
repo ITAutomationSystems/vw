@@ -1,16 +1,12 @@
 package com.example.msrobots.application.service;
 
-import com.example.msrobots.common.Constants;
 import com.example.msrobots.domain.exception.OutOfBoundsException;
-import com.example.msrobots.domain.model.Position;
 import com.example.msrobots.domain.model.Robot;
-import com.example.msrobots.domain.model.Room;
 import com.example.msrobots.domain.model.Scenario;
 import com.example.msrobots.domain.port.in.RobotServiceUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class RobotService implements RobotServiceUseCase {

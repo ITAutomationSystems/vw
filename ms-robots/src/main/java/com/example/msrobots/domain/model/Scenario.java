@@ -1,6 +1,8 @@
 package com.example.msrobots.domain.model;
 
 import com.example.msrobots.common.Constants;
+import com.example.msrobots.domain.exception.BadOrientation;
+import com.example.msrobots.domain.exception.BadRobotPosition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +48,13 @@ public class Scenario {
                 if (isOddLine(i)){
                     r = new Robot();
                     r.setDebugMode(debugMode);
+
+                    if (line.split(Constants.ESPACE).length!=3)
+                        throw new BadRobotPosition("Error! Position must follow the format 'X Y O', possibles values for O are N, S, W or E");
+
+                    if (!line.split(Constants.ESPACE)[2].toUpperCase().equals(Constants.ORIENTATION_EAST) && !line.split(Constants.ESPACE)[2].toUpperCase().equals(Constants.ORIENTATION_WEST) && !line.split(Constants.ESPACE)[2].toUpperCase().equals(Constants.ORIENTATION_SOUTH) && !line.split(Constants.ESPACE)[2].toUpperCase().equals(Constants.ORIENTATION_NORTH))
+                        throw new BadOrientation("Error! Orientation must be N, S, W or E");
+
                     r.setPosition(new Position(Integer.parseInt(line.split(Constants.ESPACE)[0]), Integer.parseInt(line.split(Constants.ESPACE)[1]), line.split(Constants.ESPACE)[2]));
                     // Not odd lines represent movements for a robot
                 } else {
@@ -73,6 +82,10 @@ public class Scenario {
      * @return
      */
     private Room getRoomFromLines(List<String> lines) {
+
+        if (lines.get(0).split(Constants.ESPACE).length!=2)
+            throw new BadRobotPosition("Error! Position must follow the format 'x y'");
+
         return new Room(getXCoordFromLine(lines.get(0)), getYCoordFromLine(lines.get(0)));
     }
 
